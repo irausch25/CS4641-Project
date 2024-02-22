@@ -1,5 +1,6 @@
 ---
 layout: default
+title: CS4641 Project Proposal
 ---
 
 # Introduction/Background:
