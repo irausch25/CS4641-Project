@@ -34,7 +34,7 @@ Using these 3 methods will result in a clean and structured dataset that can be 
 - Naïve Bayes: Used using Word-to-vec to get features along with Bayesian methods [10] by turning a sentence into a vector. 
 - SVM: Tokenize the sentences, normalize the features, and then run them through an SVM [11] to train it. Also, we can use the Kernel trick to add non-linearity. 
 - LSTM: Used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM [6]. Will require more hyperparameter tuning and resources than a traditional RNN. 
-- BERT [7] can be used for fine-tuning and then run it through the sentence.
+- BERT: Take the dataset and split it into two parts: training-section and test-section. We fine tune BERT[7] on the training-section and then use the fine-tuned BERT to make predictions on the test-section.
 
 # (Potential) Results and Discussion:
 
