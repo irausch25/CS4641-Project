@@ -21,12 +21,13 @@ title: CS4641 Project Proposal
 
 # Methods:
 
-**Preprocessing**:
+**Preprocessing**: Based on the work of Chai [1], we have identified the following 3 data preprocessing methods.
 
-- Text Normalization: For converting text to a uniform format, such as lowercasing all letters and removing special characters or unnecessary whitespace.
-- Tokenization: Breaking down the sentences in our dataset into individual tokens or words.
-- Negation Handling: Identifying a set of words affected by negation, then appending a prefix, so that we can distinguish between good and not good.
-  - “Preserving negation is essential to the survey text, because removing the negation term will result in an opposite meaning and ambiguity…” [1]
+- Text Normalization: Ensuring consistency by converting text to a uniform format (e.g., lowercase, removing extraneous characters and whitespace).
+- Tokenization: Breaking down the sentences into individual tokens or words for efficient processing.
+- Negation Handling: Identifying a set of words affected by negation, then appending a prefix, so that we can distinguish between good and not good. This is crucial as Chai [1] emphasizes “preserving negation is essential.. removing the negation term will result in an opposite meaning and ambiguity….”
+
+Using these 3 methods will result in a clean and structured dataset that can be easily analyzed.
 
 **Models/Algorithms**:
 
