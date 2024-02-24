@@ -62,7 +62,7 @@ For expected results, we anticipate replicating the relative performance ranking
 
 # Gnatt Chart:
 
-[Download CSV](GanttChart.xlsx)
+[Download CSV](UpdatedGanttChart.xlsx)
 
 # Contribution Table:
 
