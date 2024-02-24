@@ -48,13 +48,13 @@ TBD
 
 # Contribution Table:
 
-| Name              | Proposal Contributions                                                                                            |
-|:------------------|:------------------------------------------------------------------------------------------------------------------|
-| Ian Rausch        | Github pages setup and updates, Results and Discussion, Project Goals section, Data Preprocessing Methods section |
-| Parag Ambildhuke  | Github theme setup, Github pages updates, Introduction /Background section, Problem Definition section            |
-| Pritesh Rajyaguru | Powerpoint Presentation, Video Recording                                                                          |
-| Shubham Dhar      | Github pages updates, Models section                                                                              |
-| Zachary Seletsky  | Powerpoint Presentation, Video Recording                                                                          |
+| Name              | Proposal Contributions                                                                                                                |
+|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------|
+| Ian Rausch        | Github pages setup and updates, Results and Discussion, Project Goals section, Data Preprocessing Methods section, discussion with TA |
+| Parag Ambildhuke  | Github theme setup, Github pages updates, Introduction /Background section, Problem Definition section, discussion with TA            |
+| Pritesh Rajyaguru | Powerpoint Presentation, Video Recording, team meetings setup                                                                         |
+| Shubham Dhar      | Github pages updates, Models section, discussion with TA                                                                              |
+| Zachary Seletsky  | Powerpoint Presentation, Video Recording, discussion with TA                                                                          |
 
 # References:
 
