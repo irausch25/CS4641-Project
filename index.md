@@ -6,9 +6,7 @@ title: CS4641 Project Proposal
 # Introduction/Background:
 
 - **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text using 6 fundamental human emotions.
-  
 - **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
-  
 - **Dataset Description**: Contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers:
   sadness(0), joy(1), love(2), anger(3), fear(4), and surprise(5).
 
@@ -22,23 +20,24 @@ title: CS4641 Project Proposal
 
 # Methods:
 
-**Preprocessing**: Based on the work of Chai [1], we have identified the following 3 data preprocessing methods.
+**Preprocessing**: Based on Chai [1], we have identified the following 3 data preprocessing methods:
 
 - Text Normalization: Ensuring consistency by converting text to a uniform format (e.g., lowercase, removing extraneous characters and whitespace).
 - Tokenization: Breaking down the sentences into individual tokens or words for efficient processing.
 - Negation Handling: Identifying a set of words affected by negation, then appending a prefix, so that we can distinguish between good and not good. This is crucial as Chai [1] emphasizes “preserving negation is essential.. removing the negation term will result in an opposite meaning and ambiguity….”
 
-Using these 3 methods will result in a clean and structured dataset that can be easily analyzed.
+These 3 methods will result in a clean and structured dataset that can be easily analyzed.
 
 **Models/Algorithms**:
-- Naïve Bayes: Used using Word-to-vec to get features along with Bayesian methods [10] by turning a sentence into a vector. 
-- SVM: Tokenize the sentences, normalize the features, and then run them through an SVM [11] to train it. Also, we can use the Kernel trick to add non-linearity. 
-- LSTM: Used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM [6]. Will require more hyperparameter tuning and resources than a traditional RNN. 
+
+- Naïve Bayes: Used using Word-to-vec to get features along with Bayesian methods [10] by turning a sentence into a vector.
+- SVM: Tokenize the sentences, normalize the features, and then run them through an SVM [11] to train it. Also, we can use the Kernel trick to add non-linearity.
+- LSTM: Used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM [6]. Will require more hyperparameter tuning and resources than a traditional RNN.
 - BERT: Take the dataset and split it into two parts: training-section and test-section. We fine tune BERT[7] on the training-section and then use the fine-tuned BERT to make predictions on the test-section.
 
 # (Potential) Results and Discussion:
 
-We aim to assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
+We will assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
 
 These models can be expected to achieve the following results:
 
@@ -84,7 +83,7 @@ For expected results, we anticipate replicating the relative performance ranking
 
 [4] E. Batbaatar, M. Li, and K. H. Ryu, “Semantic-emotion neural network for emotion recognition from text,” IEEE Access, vol. 7, pp. 111866–111878, Aug. 2019. doi:10.1109/access.2019.2934529
 
-[5]A. Chatterjee, U. Gupta, M. K. Chinnakotla, R. Srikanth, M. Galley, and P. Agrawal, “Understanding Emotions in Text Using Deep Learning and Big Data,” Computers in Human Behavior, vol. 93, pp. 309–317, Apr. 2019, doi: https://doi.org/10.1016/j.chb.2018.12.029.
+[5] A. Chatterjee, U. Gupta, M. K. Chinnakotla, R. Srikanth, M. Galley, and P. Agrawal, “Understanding Emotions in Text Using Deep Learning and Big Data,” Computers in Human Behavior, vol. 93, pp. 309–317, Apr. 2019, doi: https://doi.org/10.1016/j.chb.2018.12.029.
 
 [6] S. Hochreiter and J. Schmidhuber, “Long Short-Term Memory,” Neural Computation, vol. 9, no. 8, pp. 1735–1780, Nov. 1997, doi: https://doi.org/10.1162/neco.1997.9.8.1735.
 
@@ -94,7 +93,6 @@ For expected results, we anticipate replicating the relative performance ranking
 
 [9] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, “BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding,” arXiv.org, Oct. 11, 2018. https://arxiv.org/abs/1810.04805
 
-‌[10] T. Mikolov, K. Chen, G. Corrado, and J. Dean, “Efficient Estimation of Word Representations in Vector Space,” arXiv.org, Sep. 07, 2013. https://arxiv.org/abs/1301.3781 
+‌[10] T. Mikolov, K. Chen, G. Corrado, and J. Dean, “Efficient Estimation of Word Representations in Vector Space,” arXiv.org, Sep. 07, 2013. https://arxiv.org/abs/1301.3781
 
-[11] “Support vector machines - IEEE Journals & Magazine,” Ieee.org, 2019. https://ieeexplore.ieee.org/document/708428 
-
+[11] “Support vector machines - IEEE Journals & Magazine,” Ieee.org, 2019. https://ieeexplore.ieee.org/document/708428
