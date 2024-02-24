@@ -5,7 +5,8 @@ title: CS4641 Project Proposal
 
 # Introduction/Background:
 
-- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text beyond positive, neutral, and negative classifications. Understanding emotional context in text has many applications such as customer feedback analysis, mental health assessment, and social media monitoring.
+- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text beyond positive, neutral, and negative classifications using 6 fundamental human emotions.
+  
 - **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
 
 - **Dataset Description**: The "Emotions" dataset contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers:
@@ -30,11 +31,7 @@ title: CS4641 Project Proposal
 Using these 3 methods will result in a clean and structured dataset that can be easily analyzed.
 
 **Models/Algorithms**:
-
-- Naive Bayes
-- RNNs
-- Support Vector Machine (SVM)
-- BERT
+Various ML and deep learning models that can be used to solve this problem. Naïve Bayes can be used using Word-to-vec (turns the sentence into a vector and then Bayesian methods to classify it) to get features[10] along with Bayesian methods. Also, we can tokenize the sentences and normalize the features and then run it through a SVM [11] to train it. Although it likely won't work as well as a Neural Network because it doesn't have any non-linearity. But, we can use the Kernel trick to add non-linearity. Similar to Recurrent Neural Network, LSTM [6] can be used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM. Will require more hyperparameter tuning and resources than a traditional RNN. BERT [7] can be used for fine-tuning and then run it through the sentence.
 
 # (Potential) Results and Discussion:
 
@@ -93,3 +90,8 @@ For expected results, we anticipate replicating the relative performance ranking
 [8] B. Pang and L. Lee, Opinion mining and sentiment analysis. Boston: Now Publishers, 2008.
 
 [9] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, “BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding,” arXiv.org, Oct. 11, 2018. https://arxiv.org/abs/1810.04805
+
+‌[10] T. Mikolov, K. Chen, G. Corrado, and J. Dean, “Efficient Estimation of Word Representations in Vector Space,” arXiv.org, Sep. 07, 2013. https://arxiv.org/abs/1301.3781 
+
+[11] “Support vector machines - IEEE Journals & Magazine,” Ieee.org, 2019. https://ieeexplore.ieee.org/document/708428 
+
