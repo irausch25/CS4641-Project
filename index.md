@@ -48,13 +48,13 @@ TBD
 
 # Contribution Table:
 
-| Name       | Proposal Contributions |
-| :--------- | :--------------------- |
-| Ian Rausch | good swedish fish      |
-| Parag      | good and plenty        |
-| Pritesh    | good `oreos`           |
-| Shube      | good `zoute` drop      |
-| Zachary    | good `zoute` drop      |
+| Name              | Proposal Contributions                                                                                            |
+|:------------------|:------------------------------------------------------------------------------------------------------------------|
+| Ian Rausch        | Github pages setup and updates, Results and Discussion, Project Goals section, Data Preprocessing Methods section |
+| Parag Ambildhuke  | Github theme setup, Github pages updates, Introduction /Background section, Problem Definition section            |
+| Pritesh Rajyaguru | Powerpoint Presentation, Video Recording                                                                          |
+| Shubham Dhar      | Github pages updates, Models section                                                                              |
+| Zachary Seletsky  | Powerpoint Presentation, Video Recording                                                                          |
 
 # References:
 
