@@ -5,20 +5,20 @@ title: CS4641 Project Proposal
 
 # Introduction/Background:
 
-- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text beyond positive, neutral, and negative classifications using 6 fundamental human emotions.
+- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text using 6 fundamental human emotions.
   
 - **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
-
-- **Dataset Description**: The "Emotions" dataset contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers:
-  sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
+  
+- **Dataset Description**: Contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers:
+  sadness(0), joy(1), love(2), anger(3), fear(4), and surprise(5).
 
 - Click [here](https://www.kaggle.com/datasets/nelgiriyewithana/emotions) to view the dataset from Kaggle.
 
 # Problem Definition:
 
-- **Problem**: Classifying exact fine-grained emotions in text poses a challenge due to the subtle nuances in text. This is the problem that the project tries to solve by accurately classifying text into one of six emotion categories.
+- **Problem**: Classifying exact emotions in text poses a challenge due to the subtle nuances in text. The project tries to solve this problem by accurately classifying text into one of six emotion categories.
 
-- **Motivation**: The motivation behind the project are the applications of understanding emotional context in text. Improved emotion detection can aid in mental health assessment, customer feedback analysis, and social media monitoring. This work is crucial for developing AI that can respond to human emotions more effectively and empathetically.
+- **Motivation**: Improved emotion detection has applications like aid in mental health assessment, customer feedback analysis, and social media monitoring. It’s crucial for developing AI that can respond to human emotions more empathetically.
 
 # Methods:
 
@@ -31,13 +31,16 @@ title: CS4641 Project Proposal
 Using these 3 methods will result in a clean and structured dataset that can be easily analyzed.
 
 **Models/Algorithms**:
-Various ML and deep learning models that can be used to solve this problem. Naïve Bayes can be used using Word-to-vec (turns the sentence into a vector and then Bayesian methods to classify it) to get features[10] along with Bayesian methods. Also, we can tokenize the sentences and normalize the features and then run it through a SVM [11] to train it. Although it likely won't work as well as a Neural Network because it doesn't have any non-linearity. But, we can use the Kernel trick to add non-linearity. Similar to Recurrent Neural Network, LSTM [6] can be used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM. Will require more hyperparameter tuning and resources than a traditional RNN. BERT [7] can be used for fine-tuning and then run it through the sentence.
+- Naïve Bayes: Used using Word-to-vec to get features along with Bayesian methods [10] by turning a sentence into a vector. 
+- SVM: Tokenize the sentences, normalize the features, and then run them through an SVM [11] to train it. Also, we can use the Kernel trick to add non-linearity. 
+- LSTM: Used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM [6]. Will require more hyperparameter tuning and resources than a traditional RNN. 
+- BERT [7] can be used for fine-tuning and then run it through the sentence.
 
 # (Potential) Results and Discussion:
 
 Based on previous works, we aim to assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
 
-From previous studies, these models can be expected to achieve the following results:
+These models can be expected to achieve the following results:
 
 - Accuracy:
   - Naive Bayes: 74.1% [3]
