@@ -5,18 +5,21 @@ title: CS4641 Project Proposal
 
 # Introduction/Background:
 
-- **Literature review**: Understanding emotional context in text has many applications such as customer feedback analysis, mental health assessment, and social media monitoring. The evolution of NLP has enabled more nuanced classifications beyond positive, neutral, and negative sentiments.
+- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text beyond positive, neutral, and negative classifications. Understanding emotional context in text has many applications such as customer feedback analysis, mental health assessment, and social media monitoring.
+  
+- **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
 
-- **Dataset Description**: The "Emotions" dataset we chose contains English Twitter messages annotated with corresponding predominant emotion conveyed using six fundamental emotions: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
-  This dataset is ideal for sentiment analysis and emotion classification tasks by analyzing the diverse spectrum of emotions expressed in short-form text on social media.
+- **Dataset Description**: The "Emotions" dataset contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers: 
+sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
+
 
 - Click [here](https://www.kaggle.com/datasets/nelgiriyewithana/emotions) to view the dataset from Kaggle.
 
 # Problem Definition:
 
-- **Problem**: While sentiment analysis on text data has been widely explored in the past, classifying fine-grained emotions poses a challenge due to the subtle nuances in text. The problem is to accurately classify text into one of six emotional categories.
+- **Problem**: Classifying exact fine-grained emotions in text poses a challenge due to the subtle nuances in text. This is the problem that the project tries to solve by accurately classifying text into one of six emotion categories.
 
-- **Motivation**: Improved emotion detection can aid in mental health assessment, customer feedback, and social engagement by providing nuanced insights beyond basic sentiment analysis. This work is crucial for developing AI that can respond to human emotions more effectively and empathetically.
+- **Motivation**: The motivation behind the project are the applications of understanding emotional context in text. Improved emotion detection can aid in mental health assessment, customer feedback analysis, and social media monitoring. This work is crucial for developing AI that can respond to human emotions more effectively and empathetically. 
 
 # Methods:
 
