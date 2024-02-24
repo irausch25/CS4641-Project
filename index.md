@@ -38,7 +38,7 @@ Using these 3 methods will result in a clean and structured dataset that can be 
 
 # (Potential) Results and Discussion:
 
-Based on previous works, we aim to assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
+We aim to assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
 
 These models can be expected to achieve the following results:
 
