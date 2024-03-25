@@ -1,12 +1,14 @@
 import pandas as pd
-import re
 import numpy as np
+import re
 import nltk
 from nltk.tokenize import word_tokenize
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score, KFold
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import classification_report
+from sklearn.metrics import make_scorer, accuracy_score, precision_score, f1_score, confusion_matrix
 from gensim.models import Word2Vec
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class EmotionClassifier:
     def __init__(self):
@@ -47,21 +49,36 @@ class EmotionClassifier:
         X_vect = np.array([self.tweet_to_vector(tweet) for tweet in X])
         return self.model_nb.predict(X_vect)
 
-    def evaluate(self, X_test, y_test):
-        y_pred = self.predict(X_test)
-        return classification_report(y_test, y_pred)
 
-
-# Load dataset
-df = pd.read_csv("sample.csv")
+df = pd.read_csv("text.csv")
 df['processed_text'] = df['text'].apply(EmotionClassifier.preprocess_text)
 
-# Split dataset
-X_train, X_test, y_train, y_test = train_test_split(df['processed_text'], df['label'], test_size=0.2)
-
 classifier = EmotionClassifier()
-classifier.train(X_train, y_train)
 
-# Evaluation
-print(classifier.evaluate(X_test, y_test))
+def cross_validate_evaluate(X, y):
+    kf = KFold(n_splits=5, random_state=42, shuffle=True)
+    acc_scores, prec_scores, f1_scores = [], [], []
 
+    for train_index, test_index in kf.split(X):
+        X_train, X_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+
+        classifier.train(X_train, y_train)
+        y_pred = classifier.predict(X_test)
+
+        # Metrics
+        acc_scores.append(accuracy_score(y_test, y_pred))
+        prec_scores.append(precision_score(y_test, y_pred, average='weighted'))
+        f1_scores.append(f1_score(y_test, y_pred, average='weighted'))
+
+    return acc_scores, prec_scores, f1_scores
+
+# Need numpy array for crossvalid 
+X = df['processed_text'].to_numpy()
+y = df['label'].to_numpy()
+
+acc, prec, f1 = cross_validate_evaluate(X, y)
+
+print("Average Accuracy:", np.mean(acc))
+print("Average Precision:", np.mean(prec))
+print("Average F1-Score:", np.mean(f1))
