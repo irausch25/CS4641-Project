@@ -66,7 +66,7 @@ classifier = EmotionClassifier()
 def cross_validate_evaluate(X, y):
     kf = KFold(n_splits=5, random_state=42, shuffle=True)
     acc_scores, prec_scores, f1_scores = [], [], []
-    confusion_matrix = np.zeros((6, 6))
+    aggregated_cm = np.zeros((6, 6))
 
     for train_index, test_index in kf.split(X):
         X_train, X_test = X[train_index], X[test_index]
@@ -82,9 +82,9 @@ def cross_validate_evaluate(X, y):
 
         # Aggregate confusion matrix
         cm = confusion_matrix(y_test, y_pred, labels=np.unique(y))
-        confusion_matrix += cm
+        aggregated_cm += cm
 
-    return acc_scores, prec_scores, f1_scores, confusion_matrix
+    return acc_scores, prec_scores, f1_scores, aggregated_cm
 
 # Need numpy array for crossvalid 
 X = df['processed_text'].to_numpy()
