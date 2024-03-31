@@ -1,14 +1,22 @@
-import pandas as pd
-import numpy as np
 import re
-import nltk
-from nltk.tokenize import word_tokenize
-from sklearn.model_selection import cross_val_score, KFold
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import make_scorer, accuracy_score, precision_score, f1_score, confusion_matrix
-from gensim.models import Word2Vec
+
 import matplotlib.pyplot as plt
+import nltk
+import numpy as np
+import pandas as pd
 import seaborn as sns
+from gensim.models import Word2Vec
+from nltk.tokenize import word_tokenize
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    make_scorer,
+    precision_score,
+)
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.naive_bayes import GaussianNB
+
 
 class EmotionClassifier:
     def __init__(self):
@@ -58,6 +66,7 @@ classifier = EmotionClassifier()
 def cross_validate_evaluate(X, y):
     kf = KFold(n_splits=5, random_state=42, shuffle=True)
     acc_scores, prec_scores, f1_scores = [], [], []
+    confusion_matrix = np.zeros((6, 6))
 
     for train_index, test_index in kf.split(X):
         X_train, X_test = X[train_index], X[test_index]
@@ -68,17 +77,29 @@ def cross_validate_evaluate(X, y):
 
         # Metrics
         acc_scores.append(accuracy_score(y_test, y_pred))
-        prec_scores.append(precision_score(y_test, y_pred, average='weighted'))
-        f1_scores.append(f1_score(y_test, y_pred, average='weighted'))
+        prec_scores.append(precision_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred)))
+        f1_scores.append(f1_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred)))
 
-    return acc_scores, prec_scores, f1_scores
+        # Aggregate confusion matrix
+        cm = confusion_matrix(y_test, y_pred, labels=np.unique(y))
+        confusion_matrix += cm
+
+    return acc_scores, prec_scores, f1_scores, confusion_matrix
 
 # Need numpy array for crossvalid 
 X = df['processed_text'].to_numpy()
 y = df['label'].to_numpy()
 
-acc, prec, f1 = cross_validate_evaluate(X, y)
+acc, prec, f1, cm = cross_validate_evaluate(X, y)
 
 print("Average Accuracy:", np.mean(acc))
 print("Average Precision:", np.mean(prec))
 print("Average F1-Score:", np.mean(f1))
+
+# plot confusion matrix
+plt.figure(figsize=(10, 7))
+sns.heatmap(cm, annot=True, fmt='g', cmap='Blues')
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.title('Aggregated Confusion Matrix')
+plt.show()
