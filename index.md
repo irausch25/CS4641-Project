@@ -96,3 +96,8 @@ For expected results, we anticipate replicating the relative performance ranking
 ‌[10] T. Mikolov, K. Chen, G. Corrado, and J. Dean, “Efficient Estimation of Word Representations in Vector Space,” arXiv.org, Sep. 07, 2013. https://arxiv.org/abs/1301.3781
 
 [11] “Support vector machines - IEEE Journals & Magazine,” Ieee.org, 2019. https://ieeexplore.ieee.org/document/708428
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+layout: default
+title: CS4641 Project Midterm Checkpoint
+---
+
