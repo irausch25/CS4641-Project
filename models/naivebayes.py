@@ -66,7 +66,7 @@ class EmotionClassifier:
         return self.model_nb.predict(X_vect)
 
 # load and preprocess the data
-df = pd.read_csv("text.csv")
+df = pd.read_csv("../text.csv")
 df['processed_text'] = df['text'].apply(EmotionClassifier.preprocess_text)
 
 classifier = EmotionClassifier()
