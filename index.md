@@ -161,7 +161,7 @@ title: CS4641 Project Midterm Checkpoint
 | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
 | Ian Rausch        | Github pages setup and updates, Results and Discussion, Project Goals section, Data Preprocessing Methods section, discussion with TA |
 | Parag Ambildhuke  | Github theme setup, Github pages updates, Introduction /Background section, Problem Definition section, discussion with TA            |
-| Pritesh Rajyaguru | Powerpoint Presentation, Video Recording, team meetings setup                                                                         |
+| Pritesh Rajyaguru | Github pages update, Midterm Checkpoint Report, directed meeting schedule                                                             |
 | Shubham Dhar      | Github pages updates, Models section, discussion with TA                                                                              |
 | Zachary Seletsky  | Powerpoint Presentation, Video Recording, discussion with TA                                                                          |
 
