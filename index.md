@@ -96,7 +96,7 @@ These models can be expected to achieve the following results:
   - Naive Bayes: 0.8514597655695431
  
 GaussianNBconfusion.png:
-![image](https://github.com/irausch25/CS4641-Project/assets/92712369/eb149dee-fb52-4119-bfe1-21e7aa2616f2)
+![alt text](plots/GuassianNBconfusion.png)
 
 MultinomialNBConfusion:
 ![image](https://github.com/irausch25/CS4641-Project/assets/92712369/705b3847-2191-4b18-a9f7-d1611542c937)
