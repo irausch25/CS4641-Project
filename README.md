@@ -1,4 +1,7 @@
-# To run docker container:
+/models/: Contains all the implemented models
 
-- docker-compose up --build
-- Go to http://localhost:4000 to see your live site!
+/plots/: Contains plots/data visualizations
+
+/models/naivebayes.py: Naive Bayes implementation following our original proposal using word2vec and gaussian nb.
+
+/models/multinomialnaivebayes.py: An improved Naive Bayes implementation using Bag-of-words and multinomial nb.
