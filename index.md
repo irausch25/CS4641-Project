@@ -94,7 +94,9 @@ These models can be expected to achieve the following results:
 
 - Avergae F1-Score:
   - Naive Bayes: 0.8514597655695431
+
 **Visualization**:
+
 GaussianNBconfusion.png:
 ![alt text](plots/GuassianNBconfusion.png)
 
