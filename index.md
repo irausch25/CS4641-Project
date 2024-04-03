@@ -94,6 +94,13 @@ These models can be expected to achieve the following results:
 
 - Avergae F1-Score:
   - Naive Bayes: 0.8514597655695431
+ 
+GaussianNBconfusion.png:
+![image](https://github.com/irausch25/CS4641-Project/assets/92712369/eb149dee-fb52-4119-bfe1-21e7aa2616f2)
+
+MultinomialNBConfusion:
+![image](https://github.com/irausch25/CS4641-Project/assets/92712369/705b3847-2191-4b18-a9f7-d1611542c937)
+
 
  These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
  # Gnatt Chart:
