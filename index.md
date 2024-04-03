@@ -86,6 +86,7 @@ These models can be expected to achieve the following results:
    - Average F1-Score: 0.851
 
    This model exceeded our expectations significantly. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial proposal. These improved metrics are likely due to the discrete frequency counts from BoW aligning well with assumptions made by a multinomial distribution. Additionally, in general, the word frequencies provided by the BoW likely captured relevant patterns that are representative of the different emotions, which allowed for an increase in accuracy.
+   
 **Visualization**:
 
 GaussianNBconfusion.png:
@@ -96,8 +97,8 @@ MultinomialNBConfusion:
 
 
  These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
- # Gnatt Chart:
-
+ 
+# Gnatt Chart:
 [Download CSV](UpdatedGanttChart.xlsx)
 
 # Contribution Table:
