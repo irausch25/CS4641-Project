@@ -97,7 +97,12 @@ MultinomialNBConfusion:
 
 
  These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
- 
+
+
+# Next Steps: 
+Going forward, we will continue with implementing our other models as listed in the proposal. We will implement SVM, LSTM, and BERT. For future comparisons, we will utilize the multinomial naive Bayes as a baseline and compare the performance of our models with it. 
+
+
 # Gnatt Chart:
 [Download CSV](UpdatedGanttChart.xlsx)
 
