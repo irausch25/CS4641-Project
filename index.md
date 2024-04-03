@@ -104,11 +104,11 @@ These models can be expected to achieve the following results:
 
 | Name              | Proposal Contributions                                                                                                                |
 | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| Ian Rausch        | Github pages setup and updates, Results and Discussion, Project Goals section, Data Preprocessing Methods section, discussion with TA |
-| Parag Ambildhuke  | Github theme setup, Github pages updates, Introduction /Background section, Problem Definition section, discussion with TA            |
+| Ian Rausch        | Github pages updates, Coding Models and data processing                                                                               |
+| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing                                                                      |
 | Pritesh Rajyaguru | Github pages update, Midterm Checkpoint Report, directed meeting schedule                                                             |
-| Shubham Dhar      | Github pages updates, Models section, discussion with TA                                                                              |
-| Zachary Seletsky  | Powerpoint Presentation, Video Recording, discussion with TA                                                                          |
+| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, discussion with TA                                                                   |
+| Zachary Seletsky  | Github pages updates, Coding Models and data processing, discussion with TA                                                           |
 
 # References:
 
