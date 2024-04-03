@@ -69,25 +69,32 @@ These models can be expected to achieve the following results:
   - Multinomial Naive Bayes with Bag-of-Words: This implementation uses a Bag-of-Words model and assumes our dataset follows a multinomial distribution. 
 
 # Results and Discussion:
-**Visualization**: To be implemented
-**Quantitative Metrics**: As stated before, we implemented 2 different versions of Naive Bayes.
+**Visualization**:
+**Quantitative Metrics**: As stated before, we implemented 2 different versions of Naive Bayes. The first one is normal Naive Bayes implementation that is catered towards our original proposal:
+- Average Accuracy:
+  - Naive Bayes: 0.4049336869841322
+  - ~40.5%
 
-1. Gaussian Naive Bayes with Word2Vec:
+- Average Precision:
+  - Naive Bayes: 0.4521636026793357
+  - ~45.2%
 
-   - Average Accuracy: ~40.5%
-   - Average Precision: ~45.2%
-   - Average F1-Score: 0.416
+- Average F1-Score:
+  - Naive Bayes: 0.4160383973789954
 
-   This model's performance fell short of our expectations. The average F1-Scores and the average precision values are in the margin of error area and almost match our proposed values. However, the average accuracy is far lower than proposed from 74% to around 40%. The lower accuracy is likely due to the combination of a Gaussian and word2vec. Since we get continuous data using word2vec that does not necessarily follow a Gaussian distribution, the Gaussian naive Bayes might not have been able to handle the features appropriately.
+ The Average F1-Scores and the Average Precision values are in the margin of error area meaning they almost match our proposed values but the Average Accuracy is far lower than proposed from 74% to around 40% which is a very large drop off that we need to revise in our algorithm.
+ The first second implementation of Naive Bayes that we implemented was the Multinomial Naive Bayes algorithm which functions a great deal better with our data set then the normal implemtation of Naive Bayes:
+- Average Accuracy:
+  - Naive Bayes: 0.8581940440264126
+  - ~85.8%
 
-2. Multinomial Naive Bayes with Bag-of-Words:
+- Average Precision:
+  - Naive Bayes: 0.8576999118616433
+  - ~85.8%
 
-   - Average Accuracy: ~85.8%
-   - Average Precision: ~85.8%
-   - Average F1-Score: 0.851
-
-   This model exceeded our expectations significantly. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial proposal. These improved metrics are likely due to the discrete frequency counts from BoW aligning well with assumptions made by a multinomial distribution. Additionally, in general, the word frequencies provided by the BoW likely captured relevant patterns that are representative of the different emotions, which allowed for an increase in accuracy.
- 
+- Avergae F1-Score:
+  - Naive Bayes: 0.8514597655695431
+**Visualization**:
 GaussianNBconfusion.png:
 ![alt text](plots/GuassianNBconfusion.png)
 
@@ -95,7 +102,8 @@ MultinomialNBConfusion:
 ![alt text](plots/MultinomialNBconfusion.png)
 
 
-# Gnatt Chart:
+ These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
+ # Gnatt Chart:
 
 [Download CSV](UpdatedGanttChart.xlsx)
 
@@ -103,10 +111,10 @@ MultinomialNBConfusion:
 
 | Name              | Proposal Contributions                                                                                                                |
 | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| Ian Rausch        | Github pages updates, Coding Models and data processing                                                                               |
-| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing                                                                      |
-| Pritesh Rajyaguru | Github pages update, Midterm Checkpoint Report, directed meeting schedule                                                             |
-| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, discussion with TA                                                                   |
+| Ian Rausch        | Github pages updates, Coding Models and data processing (Main)                                                                        |
+| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing, directed meeting schedule                                           |
+| Pritesh Rajyaguru | Github pages updatea, Midterm Checkpoint Report, data processing, directed meeting schedule                                           |
+| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, data processing, discussion with TA                                                  |
 | Zachary Seletsky  | Github pages updates, Coding Models and data processing, discussion with TA                                                           |
 
 # References:
