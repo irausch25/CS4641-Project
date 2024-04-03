@@ -99,7 +99,7 @@ GaussianNBconfusion.png:
 ![alt text](plots/GuassianNBconfusion.png)
 
 MultinomialNBConfusion:
-![alt text](plots/MultinomialNBConfusion.png)
+![alt text](plots/MultinomialNBconfusion.png)
 
 
  These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
