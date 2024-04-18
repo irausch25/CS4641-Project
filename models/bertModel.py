@@ -18,9 +18,8 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 
-
 #setting up data
-datasetPath = '../text.csv' #path to data
+datasetPath = '../sample.csv' #path to data
 df = pd.read_csv(datasetPath) #convert from csv to pandas dataframe
 #split data into texts and their corresponding labels
 texts = df['text'].tolist()
@@ -65,13 +64,13 @@ class CustomDataset(Dataset):
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=6) 
 
-#---------------------------------- training parameters ------------------------------
-#---------------------------- adjust these to fine tune model ------------------------
-batch_size = 64
-max_len = 256
-epochs = 8
-#----------- see comments at end of file for explanations on these parameters --------
-#---------------------------------vvvvvvvvvvvvvvvv------------------------------------
+#---------------------------------- training parameters ------------------------------<<<
+#---------------------------- adjust these to fine tune model ------------------------<<<
+batch_size = 8
+max_len = 64
+epochs = 20
+#----------- see comments at end of file for explanations on these parameters --------<<<
+#---------------------------------vvvvvvvvvvvvvvvv------------------------------------<<<
 
 
 # Create custom datasets and data loaders
@@ -145,8 +144,10 @@ for epoch in range(epochs):
     val_accuracy /= total_val_samples
    
     #print eval metrics
-    print(f'{epoch+1}    ||  {avg_train_loss:.4f}  ||   {val_accuracy * 100:.2f}%   ||  {precision:.4f}  || {recall:.4f} || {f1:.4f} |')
-
+    if epoch < 9:
+        print(f'{epoch+1}    ||  {avg_train_loss:.4f}  ||   {val_accuracy * 100:.2f}%   || {precision:.4f}  ||{recall:.4f}|| {f1:.4f} |')
+    else:
+        print(f'{epoch+1}   ||  {avg_train_loss:.4f}  ||   {val_accuracy * 100:.2f}%   || {precision:.4f}  ||{recall:.4f}|| {f1:.4f} |')
     #save metrics
     epoch_metrics.append({'epoch': epoch, 'train_loss': avg_train_loss, 'val_accuracy': val_accuracy, 'precision': precision, 'recall': recall, 'f1':f1})
 
@@ -157,6 +158,7 @@ for epoch in range(epochs):
     - moving std deviation
     - window size
 
+    """
     """
     #parameters
     window_size = 3
@@ -169,9 +171,10 @@ for epoch in range(epochs):
             
 
             moving_avg[key]= np.average(np.array(epoch_metrics[epoch - window_size:][key]))
+`   """
 ####################### END BETA ANALYTICS ###########################################
 
-
+"""
 #save model we just trained. 
 records = open('bertModelsTracker.txt', 'w')
 version = records.readline()[18:]
@@ -189,7 +192,7 @@ torch.save(model.state_dict(), f'bert_emotion_classifier_vT{int(versionNum)}.pth
 
 records.close()
 
-
+"""
 ######################################
 """ Parameter Instructions 
 
