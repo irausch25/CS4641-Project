@@ -1,13 +1,11 @@
 """
 Spring 2024 CS 4641 BERT Emotion Classifier Model
 packages:
-- torch
+- torch (torch torchvision torchaudio)
 - transformers
 - scikit-learn
 - pandas
 - numpy
-- datetime
-
 """
 
 
@@ -67,10 +65,14 @@ class CustomDataset(Dataset):
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=6) 
 
-# training parameters---- adjust these to fine tune model
+#---------------------------------- training parameters ------------------------------
+#---------------------------- adjust these to fine tune model ------------------------
 batch_size = 64
 max_len = 256
-epochs = 6
+epochs = 8
+#----------- see comments at end of file for explanations on these parameters --------
+#---------------------------------vvvvvvvvvvvvvvvv------------------------------------
+
 
 # Create custom datasets and data loaders
 train_dataset = CustomDataset(train_texts, train_labels, tokenizer, max_len)
@@ -186,3 +188,23 @@ else:
 torch.save(model.state_dict(), f'bert_emotion_classifier_vT{int(versionNum)}.pth')
 
 records.close()
+
+
+######################################
+""" Parameter Instructions 
+
+Determining the ideal training parameters such as batch size, max sequence length (max_len), and number of epochs involves a combination of empirical testing, understanding your dataset characteristics, and considering computational resources. Here are steps and considerations to help you determine these parameters effectively:
+
+1. Batch Size:
+Rule of Thumb: Start with a moderate batch size (e.g., 32, 64) as it balances between computational efficiency and model convergence. Very small batches may slow down training, while very large batches may lead to poor generalization.
+Resource Constraints: Consider your GPU memory capacity. Larger batch sizes require more memory. If memory is limited, reduce the batch size accordingly.
+Dataset Size: Larger datasets can generally benefit from larger batch sizes, but avoid exceeding GPU memory limits.
+2. Max Sequence Length (max_len):
+Tokenization Requirements: Set max_len to the maximum token length your model architecture supports. For BERT-like models, this is often around 512 tokens.
+Data Analysis: Analyze your dataset to determine the typical sequence lengths. Set max_len slightly higher than the maximum observed sequence length to avoid truncating important information.
+Resource Constraints: Longer sequences require more memory and computation. Balance between capturing context and computational efficiency.
+3. Number of Epochs:
+Learning Curve: Observe the training and validation loss/accuracy curves as training progresses. Stop training when validation performance starts to degrade (indicating overfitting).
+Early Stopping: Implement early stopping based on validation performance. Stop training when validation metrics plateau or start to decrease for a certain number of epochs.
+Training Time: Consider computational resources and training time constraints. More epochs generally lead to better convergence, but there are diminishing returns.
+"""
