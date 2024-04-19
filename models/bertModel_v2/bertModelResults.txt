@@ -1,0 +1,19 @@
+2024-04-19 17:46:05.216188 || Runtime:0:01:04.555742
+Parameters= batch_size:64, max_len:128, epochs:3
+Hyperarameters= test_size:0.2, random_state:42, learn_rate:5e-05
+Epoch||Train Loss||Val Accuracy||Precision||Recall||F1 Score|
+-----||----------||------------||---------||------||
+0    ||  1.5952  ||   44.50%   || 0.6488  ||0.4450|| 0.3586 |
+1    ||  1.3514  ||   57.00%   || 0.7295  ||0.5700|| 0.4588 |
+2    ||  0.9027  ||   67.00%   || 0.6582  ||0.6700|| 0.6175 |
+Emotion Detection BERT Model v2.0.0
+
+2024-04-19 17:53:31.434327 || Runtime:0:01:00.049756
+-Parameters= batch_size:64, max_len:128, epochs:3
+-Hyperarameters= test_size:0.2, random_state:42, learn_rate:5e-05
+Epoch||Train Loss||Val Accuracy||Precision||Recall||F1 Score|
+-----||----------||------------||---------||------||
+0    ||  1.6603  ||   43.00%   || 0.6810  ||0.4300|| 0.3418 |
+1    ||  1.3020  ||   58.50%   || 0.7546  ||0.5850|| 0.4747 |
+2    ||  0.8801  ||   70.00%   || 0.7269  ||0.7000|| 0.6647 |
+Emotion Detection BERT Model v2.1.0

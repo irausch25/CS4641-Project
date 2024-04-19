@@ -67,8 +67,21 @@ model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_l
 #---------------------------------- training parameters ------------------------------<<<
 #---------------------------- adjust these to fine tune model ------------------------<<<
 batch_size = 8
-max_len = 64
-epochs = 20
+max_len = 32
+epochs = 10
+
+#_______attempt to utilize gpus
+if torch.cuda.is_available():
+
+    device = torch.device('cuda')
+    model.to(device)
+    texts = texts.to(device)
+    labels = labels.to(device)
+else:
+    device = torch.device('cpu')
+
+
+print('Using device:', device)
 #----------- see comments at end of file for explanations on these parameters --------<<<
 #---------------------------------vvvvvvvvvvvvvvvv------------------------------------<<<
 
@@ -78,7 +91,7 @@ train_dataset = CustomDataset(train_texts, train_labels, tokenizer, max_len)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 # Define optimizer and loss function
-optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
+optimizer = torch.optim.AdamW(model.parameters(), lr=1e-5)
 criterion = torch.nn.CrossEntropyLoss()
 
 

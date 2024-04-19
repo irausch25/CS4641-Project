@@ -19,7 +19,7 @@ import pandas as pd
 from datetime import datetime
 
 class bertModel():
-    def __init__(self, batchSize=8, maxLen=32, epochCount=10, dataPath= '../sample.csv'):
+    def __init__(self, dataPath= '../sample.csv', testSize=0.2, randomState=42):
         self.batch_size = batchSize
         self.max_len = maxLen
         self.epochs = epochCount
@@ -27,7 +27,7 @@ class bertModel():
         self.dataFrame = pd.read_csv(dataPath)
         self.texts = self.dataFrame['text'].tolist()
         self.labels = self.dataFrame['label'].tolist()
-        self.train_texts, self.val_texts, self.train_labels, self.val_labels = train_test_split(self.texts, self.labels, test_size=0.2, random_state=42)
+        self.train_texts, self.val_texts, self.train_labels, self.val_labels = train_test_split(self.texts, self.labels, test_size=testSize, random_state=randomState)
         
    
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -69,21 +69,26 @@ class bertModel():
                 'label': torch.tensor(label, dtype=torch.long)
             }
 
-    # Initialize BERT tokenizer and model
     
-
+    """       run Model method
     #---------------------------------- training parameters ------------------------------<<<
     #---------------------------- adjust these to fine tune model ------------------------<<<
-    batch_size = batchSize
-    max_len = maxLen
-    epochs = epochCount
     #----------- see comments at end of file for explanations on these parameters --------<<<
+    """
+    def runModel(self, batchSize, maxLen, epochCount):
+
+
+   
+        batch_size = batchSize
+        max_len = maxLen
+        epochs = epochCount
+    
     #---------------------------------vvvvvvvvvvvvvvvv------------------------------------<<<
 
 
     # Create custom datasets and data loaders
-    train_dataset = CustomDataset(train_texts, train_labels, tokenizer, max_len)
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+        train_dataset = self.CustomDataset(self.train_texts, self.train_labels, self.tokenizer, max_len)
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
     # Define optimizer and loss function
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
@@ -157,7 +162,7 @@ class bertModel():
         #save metrics
         epoch_metrics.append({'epoch': epoch, 'train_loss': avg_train_loss, 'val_accuracy': val_accuracy, 'precision': precision, 'recall': recall, 'f1':f1})
 
-        return epoch_metrics
+        epoch_metrics
     ####################### BETA ANALYTICS ###############################################
         """ use metrics to stop model to prevent overfitting
         - moving average
