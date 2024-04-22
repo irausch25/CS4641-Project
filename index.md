@@ -1,16 +1,21 @@
 ---
 layout: default
-title: CS4641 Project Midterm Checkpoint 
+title: CS4641 Emotion Classification
 ---
 
 # Introduction/Background:
 
 - **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text using 6 fundamental human emotions.
 - **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
-- **Dataset Description**: Contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers:
-  sadness(0), joy(1), love(2), anger(3), fear(4), and surprise(5).
+- **Dataset Description**: Contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
 
 - Click [here](https://www.kaggle.com/datasets/nelgiriyewithana/emotions) to view the dataset from Kaggle.
+
+  **Bar Chart Visualization**: ![Bar Chart of Emotion Distribution](/plots/bargraph.png)
+
+  **Pie Chart Visualization**: ![Pie Chart of Emotion Distribution](/plots/piechart.png)
+
+  From the visualizations above, we can observe several aspects of our dataset. The bar chart illustrates that some emotions, such as joy and sadness, are more frequently represented in the dataset than others like love and surprise. Similarly, the pie chart provides a different perspective by showing the proportion of each emotion within the dataset. It highlights that nearly two thirds of the dataset is composed of tweets expressing joy and sadness, which could be indicative of the general sentiment found in public tweets or a bias in the way the dataset was collected.
 
 # Problem Definition:
 
@@ -18,28 +23,57 @@ title: CS4641 Project Midterm Checkpoint
 
 - **Motivation**: Improved emotion detection has applications like aid in mental health assessment, customer feedback analysis, and social media monitoring. It’s crucial to develop AI that can respond to human emotions more empathetically.
 
-# Methods:
+# Preprocessing:
 
-**Preprocessing**: Based on Chai [1], we have identified the following 3 data preprocessing methods:
+Based on Chai [1], we have implemented the following 3 data preprocessing methods:
 
-- Text Normalization: Ensuring consistency by converting text to a uniform format (e.g., lowercase, removing extraneous characters and whitespace).
-- Tokenization: Breaking down the sentences into individual tokens or words for efficient processing.
-- Negation Handling: Identifying a set of words affected by negation, then appending a prefix, so that we can distinguish between good and not good. This is crucial as Chai [1] emphasizes “preserving negation is essential.. removing the negation term will result in an opposite meaning and ambiguity….”
+- **Text Normalization**: We standardized the format of the text data to ensure consistency. This includes converting all text to lowercase and removing non-alphanumeric characters.
+- **Tokenization**: We broke down sentences into individual words or tokens to prepare the data for vectorization and efficient processing.
+- **Negation Handling**: To distinguish between good and not good more effectively, we appended a prefix to words following negations. This is crucial as Chai [1] emphasizes “preserving negation is essential.. removing the negation term will result in an opposite meaning and ambiguity….”
 
-These 3 methods will result in a clean and structured dataset that can be easily analyzed.
+Using these 3 methods, we have a clean and structured dataset that can be easily analyzed, which helps optimize text data for analysis and model training.
 
-**Models/Algorithms**:
+# Models/Algorithms:
 
-- Naïve Bayes: Used using Word-to-vec to get features along with Bayesian methods [10] by turning a sentence into a vector.
-- SVM: Tokenize the sentences, normalize the features, and then run them through an SVM [11] to train it. Also, we can use the Kernel trick to add non-linearity.
-- LSTM: Used to tokenize and then use Stochastic Gradient Descent(SGD) algorithm to train the LSTM [6]. Will require more hyperparameter tuning and resources than a traditional RNN.
-- BERT: Take the dataset and split it into two parts: training-section and test-section. We fine tune BERT[7] on the training-section and then use the fine-tuned BERT to make predictions on the test-section.
+Based on research into NLP techniques, we selected and implemented 4 different algorithms to evaluate how each performed on our dataset:
 
-# Proposed Results and Discussion:
+### Naive Bayes
 
-We will assess the performance of our models based on F1 score, accuracy, and precision with the relative performance ranking of the models being Naive Bayes, SVM, RNN, and BERT across all 3 quantitative measures.
+- **Implementation Details**:
 
-These models can be expected to achieve the following results:
+  - **Gaussian Naive Bayes with Word2Vec**: For this model, we used Word2Vec to transform sentences into numerical vectors that capture the semantic meanings of words. These vectors were then into a Gaussian Naive Bayes, which assumes that features follow a normal distribution.
+
+  - **Multinomial Naive Bayes with Bag-of-Words**: This model utilized Bag-of-Words to convert text into fixed-length vectors, where each entry represents the frequency of a word. This approach fits well with Multinomial Naive Bayes, which assumes data distribution to be multinomial.
+
+- **Rationale**: Naive Bayes is well-established as a text classification technique because of its ability to handle large datasets efficiently and its effectiveness in probabilistic separation of classes. From our research, incorporating Word2Vec with Gaussian Naive Bayes seemed like a promising sentiment analysis [10]. However, in practice, this model underperformed due to the independence assumption of Gaussian Naive Bayes, which conflicts with the correlated features in Word2Vec. As a result, we also implemented Multinomial Naive Bayes, which complement the discrete counts from Bag-of-Words. Additionally, we opted to implement Naive Bayes first as it will be a great baseline to assess the performance of more complex models and understand our dataset further.
+
+### Support Vector Machine (SVM)
+
+- **Implementation Details**:
+
+  - **Linear Kernel SVM**: We opted for a Linear Kernel SVM, believing that features might be linearly separable after vectorization with Bag-of-Words. This kernel is known for its efficiency and effectiveness when the features can be clearly divided by a linear boundary.
+
+  - **RBF Kernel SVM**: To account for the possibility that the features are not linearly separable after vectorization, we also tested a Radial Basis Function (RBF) Kernel SVM. This approach was to determine if introducing non-linearity would improve classification accuracy.
+
+- **Rationale**: Like Naive Bayes, SVM is known for its effectiveness in classification tasks because of its ability to provide clear margins of separation between classes, especially in high-dimensional spaces like those encountered in text analysis [11]. The linear kernel was selected due to its simplicity and the possibility that text data could be linearly separable vectorization with Bag-of-Words. However, to also test the possibility of introducing non-linearity, we explored using the RBF kernel as well. Implementing both kernels allowed us to directly compare the impact of assuming linear vs. non-linear separations in our data.
+
+### RNN LSTM (Recurrent Neural Network with Long Short-Term Memory)
+
+- **Implementation Details**: We implemented an LSTM model ...
+
+- **Rationale**: LSTMs are particularly effective for tasks that require memory of past information, such as predicting the emotional tone of a sentence which may depend heavily on earlier parts of the text. The ability of LSTMs to avoid the long-term dependency problem commonly seen in standard RNNs made it an ideal choice for our project ... Something
+
+### BERT (Bidirectional Encoder Representations from Transformers)
+
+- **Implementation Details**: We implemented BERT by fine-tuning a pre-trained model on our dataset ...
+
+- **Rationale**: BERT has revolutionized the field of NLP through its deep contextual understanding, which is critical for tasks like emotion detection where context significantly influences meaning [7] ...
+
+### Evaluation and Initial Goals:
+
+Each model was evaluated based on accuracy, precision, and F1-score. These evaluations helped us understand the strengths and weaknesses of each approach in the context of our dataset and project goals.
+
+From our research, our project goals are to reach or beat the following metrics:
 
 - Accuracy:
   - Naive Bayes: 74.1% [3]
@@ -57,27 +91,21 @@ These models can be expected to achieve the following results:
   - RNN: 0.54 [4]
   - BERT: 0.84 [7]
 
-# Midterm Implementation:
-**Data Processing Methods Implemented**: We have implemented all 3 data processing methods outlined in our initial proposal, which are crucial for preparing our text data for effective analysis:
-
-- Text Normalization: We standardized the format of the text data to ensure consistency. This includes converting all text to lowercase and removing non-alphanumeric characters. 
-- Tokenization: We broke down sentences into individual words or tokens to prepare the data for vectorization and efficient processing.
-- Negation Handling: To distinguish between good and not good more effectively, we appended a prefix to words following negations.
-
-**Machine Learning Algorithm Implemented**: We implemented the Naive Bayes algorithm as this was the simplest algorithm to implement based on our problem statement. Additionally, with how widely used it is in text classification, Naive Bayes will be a great baseline to assess the performance of our planned, more complex models. Currently, we have 2 different versions of Naive Bayes implemented that give separate, distinct results.
-  - Gaussian Naive Bayes with Word2Vec: This implementation aligns with our initial proposal to utilize Word2Vec and assumes our dataset follows a Gaussian distribution. 
-  - Multinomial Naive Bayes with Bag-of-Words: This implementation uses a Bag-of-Words model and assumes our dataset follows a multinomial distribution. 
+Building on these ideas, our planned performance ranking based on the 3 quantitiatve measures is: Naive Bayes < SVM < RNN < BERT.
 
 # Results and Discussion:
 
-**Quantitative Metrics**: As stated before, we implemented 2 different versions of Naive Bayes.
+As stated before, we implemented 2 different versions of Naive Bayes.
+
 1. Gaussian Naive Bayes with Word2Vec:
 
    - Average Accuracy: ~40.5%
    - Average Precision: ~45.2%
    - Average F1-Score: 0.416
 
-   This model's performance fell short of our expectations. The average F1-Scores and the average precision values are in the margin of error area and almost match our proposed values. However, the average accuracy is far lower than proposed from 74% to around 40%. The lower accuracy is likely due to the combination of a Gaussian and word2vec. Since we get continuous data using word2vec that does not necessarily follow a Gaussian distribution, the Gaussian naive Bayes might not have been able to handle the features appropriately.
+   This model's performance fell short of our expectations. While the combination of Word2Vec and Gaussian Naive Bayes was theoretically appealing due to Word2Vec's ability to capture semantics in text, the actual outcomes highlighted a mismatch. Gaussian Naive Bayes assumes that all features are independent and follow a normal distribution, which likely doesn't hold true for the dense and interdepedent feature vectors produced by Word2Vec. This mismatch likely led to the model's poor performance, where the average accuracy is far lower than proposed from 74% to around 40%. Despite this poor accuracy, the average F1-Scores and the average precision values are in the margin of error area and almost match our proposed values.
+
+   ![alt text](plots/GuassianNBconfusion.png)
 
 2. Multinomial Naive Bayes with Bag-of-Words:
 
@@ -85,36 +113,51 @@ These models can be expected to achieve the following results:
    - Average Precision: ~85.8%
    - Average F1-Score: 0.851
 
-   This model exceeded our expectations significantly. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial proposal. These improved metrics are likely due to the discrete frequency counts from BoW aligning well with assumptions made by a multinomial distribution. Additionally, in general, the word frequencies provided by the BoW likely captured relevant patterns that are representative of the different emotions, which allowed for an increase in accuracy.
-   
-**Visualization**:
+   Contrary to the Gaussian version, the Multinomial Naive Bayes model exceeded our expectations.
 
-GaussianNBconfusion.png:
-![alt text](plots/GuassianNBconfusion.png)
+   The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial proposal. These improved metrics are likely due to the discrete frequency counts from BoW aligning well with assumptions made by a multinomial distribution. Additionally, in general, the word frequencies provided by the BoW likely captured relevant patterns that are representative of the different emotions, which allowed for an increase in accuracy.
 
-MultinomialNBConfusion:
-![alt text](plots/MultinomialNBconfusion.png)
+   ![alt text](plots/MultinomialNBconfusion.png)
 
+Similarly, for SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function).
 
- These values for the multinomial Naive Bayes do not accuratly match up with our initial proposal of Naive Bayes but the values are much better then the normal implementation with the Average Accuracy betting closer to the proposed Accuracy. By the Quantitative Metrics, the multinomial implementation of Naive Bayes functions better according to our data set.
+1. SVM using RBF Kernel
 
+   - Average Accuracy: ~86.6519%
+   - Average Precision: ~86.46919
+   - Average F1-Score: 0.864026
+     ![alt text](plots/NonLinearSVMConfusion.png)
 
-# Next Steps: 
-Going forward, we will continue with implementing our other models as listed in the proposal. We will implement SVM, LSTM, and BERT. For future comparisons, we will utilize the multinomial naive Bayes as a baseline and compare the performance of our models with it. 
+2. SVM using Linear Kernel
 
+   - Average Accuracy: ~88.2946%
+   - Average Precision: ~88.2895%
+   - Average F1-Score: 0.882915
+     ![alt text](plots/LinearSVMConfusion.png)
+
+From the results above, we found that our SVM implementations were on par in terms of accuracy with our predicted results. but we exceeded our expectations in terms of precision and F1-score. Interestingly, a linear kernel slightly out-performed using a non-linear kernel, likely because.
+
+# Comparing Different Models:
+
+Likewise, as expected, SVM slightly out-performed our naive bayes model by ~+3 in all 3 metrics. This is likely due to the nature of SVM... However, in terms of training time, SVM took 4x the time of naive bayes to finish training ..
+
+# Next Steps:
+
+Going forward, we have many routes to take. We can continue testing additional classification algorithms such as logistic regression. Alternatively, we can compile a new dataset that more accurately captures the breadth of emotions out there, and train our models on this new dataset to better suit our solution. Finally, we have plans to implement a GUI and host our trained models, so that users can input a sentence and get the corresponding sentiment.
 
 # Gnatt Chart:
+
 [Download CSV](UpdatedGanttChart.xlsx)
 
 # Contribution Table:
 
-| Name              | Proposal Contributions                                                                                                                |
-| :---------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| Ian Rausch        | Github pages updates, Coding Models and data processing (Main)                                                                        |
-| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing, directed meeting schedule                                           |
-| Pritesh Rajyaguru | Github pages updatea, Midterm Checkpoint Report, data processing, directed meeting schedule                                           |
-| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, data processing, discussion with TA                                                  |
-| Zachary Seletsky  | Github pages updates, Coding Models and data processing, discussion with TA                                                           |
+| Name              | Proposal Contributions                                                                      |
+| :---------------- | :------------------------------------------------------------------------------------------ |
+| Ian Rausch        | Github pages updates, Coding Models and data processing (Main)                              |
+| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing, directed meeting schedule |
+| Pritesh Rajyaguru | Github pages updatea, Midterm Checkpoint Report, data processing, directed meeting schedule |
+| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, data processing, discussion with TA        |
+| Zachary Seletsky  | Github pages updates, Coding Models and data processing, discussion with TA                 |
 
 # References:
 
