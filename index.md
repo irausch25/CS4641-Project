@@ -95,7 +95,7 @@ Building on these ideas, our planned performance ranking based on the 3 quantiti
 
 # Results and Discussion:
 
-As stated before, we implemented 2 different versions of Naive Bayes.
+As stated before, we implemented 2 different versions of Naive Bayes, each using different feature extractions methods.
 
 1. Gaussian Naive Bayes with Word2Vec:
 
@@ -107,17 +107,19 @@ As stated before, we implemented 2 different versions of Naive Bayes.
 
    ![alt text](plots/GuassianNBconfusion.png)
 
+   The confusion matrix for the Gaussian Naive Bayes model reveals significant misclassifications across the board. The diagonal elements, which represent correct predictions, are generally outnumbered by the off-diagonal elements in several classes, demonstrating the high rate of incorrect classifications. Relatively speaking, the model performed the best on classifying `joy, but even for this emotion the predications were still quite scattered. Overall, from this matrix, we can guess that the semantic nuances between certain emotions were not captured effectively by the Gaussian model.
+
 2. Multinomial Naive Bayes with Bag-of-Words:
 
    - Average Accuracy: ~85.8%
    - Average Precision: ~85.8%
    - Average F1-Score: 0.851
 
-   Contrary to the Gaussian version, the Multinomial Naive Bayes model exceeded our expectations.
-
-   The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial proposal. These improved metrics are likely due to the discrete frequency counts from BoW aligning well with assumptions made by a multinomial distribution. Additionally, in general, the word frequencies provided by the BoW likely captured relevant patterns that are representative of the different emotions, which allowed for an increase in accuracy.
+   Contrary to the Gaussian version, the Multinomial Naive Bayes model exceeded our expectations. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial set goals. Using Bag-of-Words for feature extraction, which breaks down text into individual word counts, aligned well with multinomial probabilitic framework of a multinomial naive bayes. The synergy between the two allowed this implementation to capture relevant patterns that are representative of the different emotions, which allowed for the improved metrics.
 
    ![alt text](plots/MultinomialNBconfusion.png)
+
+   Analyzing the confusion matrix for the Multinomial Naive Bayes model, we see a stark contrast to the Gaussian variant. The diagonal elements, indicating correct classifications, are more prominent across all emotional categories, which suggests the model was able discern between different emotions effectively. Notably, the precision for the sadness (0) and joy (1) were particularly high However, there is room for improvement in correctly classifying less frequent emotions, such as love (2) and surprise (5). From the matrix, we can see that the model still confuses them with other emotions, espcially surprise.
 
 Similarly, for SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function).
 
