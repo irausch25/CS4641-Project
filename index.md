@@ -95,9 +95,11 @@ Building on these ideas, our planned performance ranking based on the 3 quantiti
 
 # Results and Discussion:
 
+### Naive Bayes
+
 As stated before, we implemented 2 different versions of Naive Bayes, each using different feature extractions methods.
 
-1. Gaussian Naive Bayes with Word2Vec:
+1. **Gaussian Naive Bayes with Word2Vec**:
 
    - Average Accuracy: ~40.5%
    - Average Precision: ~45.2%
@@ -109,7 +111,7 @@ As stated before, we implemented 2 different versions of Naive Bayes, each using
 
    The confusion matrix for the Gaussian Naive Bayes model reveals significant misclassifications across the board. The diagonal elements, which represent correct predictions, are generally outnumbered by the off-diagonal elements in several classes, demonstrating the high rate of incorrect classifications. Relatively speaking, the model performed the best on classifying `joy, but even for this emotion the predications were still quite scattered. Overall, from this matrix, we can guess that the semantic nuances between certain emotions were not captured effectively by the Gaussian model.
 
-2. Multinomial Naive Bayes with Bag-of-Words:
+2. **Multinomial Naive Bayes with Bag-of-Words**:
 
    - Average Accuracy: ~85.8%
    - Average Precision: ~85.8%
@@ -121,27 +123,38 @@ As stated before, we implemented 2 different versions of Naive Bayes, each using
 
    Analyzing the confusion matrix for the Multinomial Naive Bayes model, we see a stark contrast to the Gaussian variant. The diagonal elements, indicating correct classifications, are more prominent across all emotional categories, which suggests the model was able discern between different emotions effectively. Notably, the precision for the sadness (0) and joy (1) were particularly high However, there is room for improvement in correctly classifying less frequent emotions, such as love (2) and surprise (5). From the matrix, we can see that the model still confuses them with other emotions, espcially surprise.
 
-Similarly, for SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function).
+### SVM (Support Vector Machine)
 
-1. SVM using RBF Kernel
+For SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function).
+
+1. **SVM using RBF Kernel**
 
    - Average Accuracy: ~86.6519%
    - Average Precision: ~86.46919
    - Average F1-Score: 0.864026
-     ![alt text](plots/NonLinearSVMConfusion.png)
 
-2. SVM using Linear Kernel
+   This implementation performed quite well. The use of the RBF kernel was intended to capture non-linear patterns post-vectorization which are not immediately apparent. However, the slight underperformance compared to the Linear Kernel SVM could suggest that the dataset's features might be more linearly separable than initially anticipated or that we need to optimize the hyperparamters of the model further.
+   ![alt text](plots/NonLinearSVMConfusion.png)
+
+   The confusion matrix for the RBF Kernel SVM displays a strong diagonal concentration, indicating a high rate of correct predictions. However, there are noticeable misclassifications, particularly between emotions fear (4) and surprise (5) and joy (1) and love (2). This indicates that the model might have had trouble differentiating between the finer emotional sentiments. However, overall, the model performed well.
+
+2. **SVM using Linear Kernel**
 
    - Average Accuracy: ~88.2946%
    - Average Precision: ~88.2895%
    - Average F1-Score: 0.882915
-     ![alt text](plots/LinearSVMConfusion.png)
 
-From the results above, we found that our SVM implementations were on par in terms of accuracy with our predicted results. but we exceeded our expectations in terms of precision and F1-score. Interestingly, a linear kernel slightly out-performed using a non-linear kernel, likely because.
+   The Linear Kernel SVM outperformed the RBF Kernel SVM, suggesting the feature space, post-vectorization, might indeed be linearly separable to a large degree. The high performance across accuracy, precision, and F1-score metrics indicates that this model was effective in creating a decision boundary that correctly separates the different emotion classes without needing the complexity of a non-linear kernel.
 
-# Comparing Different Models:
+   ![alt text](plots/LinearSVMConfusion.png)
 
-Likewise, as expected, SVM slightly out-performed our naive bayes model by ~+3 in all 3 metrics. This is likely due to the nature of SVM... However, in terms of training time, SVM took 4x the time of naive bayes to finish training ..
+   Analyzing the confusion matrix of the Linear Kernel SVM, we see a clear distinction in the diagonal elements, which represent correct classifications. The model shows strong performance especially in classifying sadness (0) and joy (1). However, it does seem to slightly struggle in distinguishing between joy (1) and love (2). Overall, from the matrix, the linear kernel was particularly effective at distinguishing between the different emotions.
+
+### Comparing Different Models:
+
+Analyzing the results, we observed that the SVM implementations outperformed the Naive Bayes classifiers, with improvements of approximately 3% across accuracy, precision, and F1-score metrics, when comparing multinomial naive bayes and linear kernel SVM. This peromance increases is likely due to SVM's robustness in handling high-dimensional data and its capacity for creating optimal hyperplanes that separate the various classes. Since it looks to maximize the margin and create the widest possible gap between them, SVM is particularly strong at text classification tasks.
+
+However, this increase in performance comes with trade-offs. One of the most significant is computational efficiency—SVM models, especially those with RBF kernels, require more intensive computation to identify the optimal boundary. During our project, the training time for SVM was approximately four times longer than that for the Naive Bayes models, and when consider practical applications, this trade-off needs to be evaluated appropriately. Naive bayes, while less accurate, does have some uses. Its assumption that features are indepdent allows for a simplier model and faster training times, which can be valuable at times. Similarly, Naive Bayes models understand the probabilities underlying the features, making it more informative if we need to udnerstand the likelihood of each class.
 
 # Next Steps:
 
