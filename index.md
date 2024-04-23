@@ -125,7 +125,7 @@ As stated before, we implemented 2 different versions of Naive Bayes, each using
 
 ### SVM (Support Vector Machine)
 
-For SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function).
+For SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function). We utilized a guess and check system to test for linear seperability because after vectorization, we have 57697 features, which is difficult to visualize.
 
 1. **SVM using RBF Kernel**
 
