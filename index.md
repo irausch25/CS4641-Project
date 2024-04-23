@@ -57,17 +57,11 @@ Based on research into NLP techniques, we selected and implemented 4 different a
 
 - **Rationale**: Like Naive Bayes, SVM is known for its effectiveness in classification tasks because of its ability to provide clear margins of separation between classes, especially in high-dimensional spaces like those encountered in text analysis [11]. The linear kernel was selected due to its simplicity and the possibility that text data could be linearly separable vectorization with Bag-of-Words. However, to also test the possibility of introducing non-linearity, we explored using the RBF kernel as well. Implementing both kernels allowed us to directly compare the impact of assuming linear vs. non-linear separations in our data.
 
-### RNN LSTM (Recurrent Neural Network with Long Short-Term Memory)
-
-- **Implementation Details**: We implemented an LSTM model ...
-
-- **Rationale**: LSTMs are particularly effective for tasks that require memory of past information, such as predicting the emotional tone of a sentence which may depend heavily on earlier parts of the text. The ability of LSTMs to avoid the long-term dependency problem commonly seen in standard RNNs made it an ideal choice for our project ... Something
-
 ### BERT (Bidirectional Encoder Representations from Transformers)
 
-- **Implementation Details**: We implemented BERT by fine-tuning a pre-trained model on our dataset ...
+- **Implementation Details**: We implemented BERT by fine-tuning a pre-trained model on our dataset. Using the transformer package, we created a BERT model class, with a BERT-specific tokenizer. Following our data preprocessing, we trained the model using the Adam optimizer with 3 epochs.
 
-- **Rationale**: BERT has revolutionized the field of NLP through its deep contextual understanding, which is critical for tasks like emotion detection where context significantly influences meaning [7] ...
+- **Rationale**: BERT has revolutionized the field of NLP through its deep contextual understanding, which is critical for tasks like emotion detection where context significantly influences meaning [7]. Unlike our earlier models which struggled with capturing nuanced meanings due to their reliance on static word embeddings, BERT's bidirectional architecture allows it to consider the entire context of a word within it’s sentence, leading to more accurate and contextually deep representations. Emotions in text can be subtle and heavily context-dependent; BERT's design to capture this context makes it a powerful tool for our problem.
 
 ### Evaluation and Initial Goals:
 
@@ -150,18 +144,49 @@ For SVM, we tested our implementation using two different kernels, a linear one 
 
    Analyzing the confusion matrix of the Linear Kernel SVM, we see a clear distinction in the diagonal elements, which represent correct classifications. The model shows strong performance especially in classifying sadness (0) and joy (1). However, it does seem to slightly struggle in distinguishing between joy (1) and love (2). Overall, from the matrix, the linear kernel was particularly effective at distinguishing between the different emotions.
 
-### We also created two interactive jupyter notebooks that explain each of these algorithms. These can be accessed on the GitHub repository or using these links(hosted on another application):
-[Naive Bayes and SVM](https://mybinder.org/v2/gh/CS4641-Project/CS4641-website/main?labpath=emotions.ipynb)
+### BERT (Bidirectional Encoder Representations from Transformers)
+
+The BERT model excelled in emotion classification, with metrics indicating a strong understanding of contextual nuances in text.
+
+- Average Accuracy: ~94.17%
+- Average Precision: ~94.89%
+- Average F1-Score: 0.9433
+
+  ![alt text](plots/BERTtrainingloss.png)
+
+  The graph above illustrates the model's training loss over the course of 3 epochs. There's a significant drop between the first and second epoch, followed by a more gradual decline into the third, which indicts that while the model is still learning and refining its understanding, the rate of improvement is slowing down.
+
+  ![alt text](plots/BERTaccuracy.png)
+
+  As for accuracy, the graph shows that small improvements can be gradually made with each epoch. The model's accuracy starts at a high baseline and continues to improve, with each epoch. However, while it appears like a steep increase, the scale of each improvement is quite small.
+
+**Discussion**
+
+BERT's bidirectional nature and ability to understand context gives it a big advantage over other models like Naive Bayes and SVM, which is evident from the high scores across all 3 metrics. The training loss and accuracy graphs suggest that the model was effectively learning from the data over each epoch, and given the consistent improvement, it is possible that using additional epochs would have improved our results further. For future optimization and fine-tuning, we should consider extending the number of epochs slightly; however, at the same time, we have to be cautious since there is a high possibility of overfitting with too many epochs.
 
 ### Comparing Different Models:
 
-Analyzing the results, we observed that the SVM implementations outperformed the Naive Bayes classifiers, with improvements of approximately 3% across accuracy, precision, and F1-score metrics, when comparing multinomial naive bayes and linear kernel SVM. This peromance increases is likely due to SVM's robustness in handling high-dimensional data and its capacity for creating optimal hyperplanes that separate the various classes. Since it looks to maximize the margin and create the widest possible gap between them, SVM is particularly strong at text classification tasks.
+Analyzing the results, we observed that the SVM implementations outperformed the Naive Bayes classifiers, with improvements of approximately 3% across accuracy, precision, and F1-score metrics, when comparing multinomial naive bayes and linear kernel SVM. This performance increases is likely due to SVM's robustness in handling high-dimensional data and its capacity for creating optimal hyperplanes that separate the various classes. Since it looks to maximize the margin and create the widest possible gap between them, SVM is particularly strong at text classification tasks.
 
 However, this increase in performance comes with trade-offs. One of the most significant is computational efficiency—SVM models, especially those with RBF kernels, require more intensive computation to identify the optimal boundary. During our project, the training time for SVM was approximately four times longer than that for the Naive Bayes models, and when consider practical applications, this trade-off needs to be evaluated appropriately. Naive bayes, while less accurate, does have some uses. Its assumption that features are indepdent allows for a simplier model and faster training times, which can be valuable at times. Similarly, Naive Bayes models understand the probabilities underlying the features, making it more informative if we need to udnerstand the likelihood of each class.
 
+When incorporating BERT into the comparison, the leap in performance is even greater. BERT achieved a substantial increase in accuracy, precision, and F1-score, surpassing both SVM and Naive Bayes by a significant margin. This performance is likely due to BERT's ability to understand the full context of text, which are lacking in simple Naive Bayes and SVM implementations.
+
+Surprisingly, despite the increased complexity, our implementation of BERT with 3 epochs finished training faster than both SVM models. This could be due to a number of factors, including the efficiency of the BERT implementation within the Transformers library, our specific hardware, or the optimization techniques we utilized. Nevertheless, Naive Bayes remains the fastest model to train.
+
+In practical applications, neither of these models is the obvious choice and involves a balance of different factors. When time and computational resources are limited, Naive Bayes might work as a good model, providing quick insights at the cost of some accuracy. SVM, with its superior performance, could be used when more precision and accuracy is necessary and you can afford longer training times. BERT's quick training in our case suggests that with the right infrastructure and optimization complex models can be efficient. However, it's possible that BERT will require more computational needs for regular upkeep, and might not be ideal in resource-constrained environments.
+
+Ultimately, the decision on which model to use depends on the specific requirements of the task, the available computational resources, and how accurate the model needs to be.
+
+### Jupyter Notebook:
+
+We also created two interactive jupyter notebooks that explain each of these algorithms. These can be accessed on the GitHub repository or using these links:
+
+[Naive Bayes and SVM](https://mybinder.org/v2/gh/CS4641-Project/CS4641-website/main?labpath=emotions.ipynb)
+
 # Next Steps:
 
-Going forward, we have many routes to take. We can continue testing additional classification algorithms such as logistic regression. Alternatively, we can compile a new dataset that more accurately captures the breadth of emotions out there, and train our models on this new dataset to better suit our solution. Finally, we have plans to implement a GUI and host our trained models, so that users can input a sentence and get the corresponding sentiment.
+Going forward, we have many routes to take. We can continue testing additional classification algorithms such as logistic regression or exploring more deep learning techniques like a RNN. Alternatively, we can compile a new dataset that more accurately captures the variety of emotions out there, and train our models on this new dataset to better suit our solution. Finally, we have plans to implement a GUI and host our trained models, so that users can input a sentence and get the corresponding sentiment.
 
 # Gnatt Chart:
 
@@ -169,13 +194,13 @@ Going forward, we have many routes to take. We can continue testing additional c
 
 # Contribution Table:
 
-| Name              | Proposal Contributions                                                                      |
-| :---------------- | :------------------------------------------------------------------------------------------ |
-| Ian Rausch        | Github pages updates, Coding Models and data processing (Main)                              |
-| Parag Ambildhuke  | Github pages updates, Midterm Checkpoint Report, data processing, directed meeting schedule |
-| Pritesh Rajyaguru | Github pages updatea, Midterm Checkpoint Report, data processing, directed meeting schedule |
-| Shubham Dhar      | Github pages updates, Midterm Checkpoint Report, data processing, discussion with TA        |
-| Zachary Seletsky  | Github pages updates, Coding Models and data processing, discussion with TA                 |
+| Name              | Final Contributions                                                                             |
+| :---------------- | :---------------------------------------------------------------------------------------------- |
+| Ian Rausch        | Github page writing, data preprocessing, SVM and Naive Bayes implementations and visualizations |
+| Parag Ambildhuke  | Github page updates, Jupyter notebook upkeep, Video recording                                   |
+| Pritesh Rajyaguru | LSTM RNN testing, Video recording                                                               |
+| Shubham Dhar      | BERT Visualizations, Video recording                                                            |
+| Zachary Seletsky  | BERT implementation and optimization, Video slide presentation                                  |
 
 # References:
 
