@@ -105,7 +105,7 @@ import nltk
 
 nltk.download('punkt')
 nltk.download('stopwords')
-data_set = panda.read_csv('text.csv')
+data_set = panda.read_csv('../text.csv')
 data_set.head(10)
 data_set.columns
 data_set.drop(columns='Unnamed: 0', inplace=True)
