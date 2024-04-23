@@ -151,7 +151,7 @@ For SVM, we tested our implementation using two different kernels, a linear one 
    Analyzing the confusion matrix of the Linear Kernel SVM, we see a clear distinction in the diagonal elements, which represent correct classifications. The model shows strong performance especially in classifying sadness (0) and joy (1). However, it does seem to slightly struggle in distinguishing between joy (1) and love (2). Overall, from the matrix, the linear kernel was particularly effective at distinguishing between the different emotions.
 
 ### We also created two jupyter notebook that explain each of these algorithms. These can be accessed on the GitHub repository or using these links(hosted on another application):
-https://mybinder.org/v2/gh/CS4641-Project/CS4641-website/main?labpath=emotions.ipynb
+[Naive Bayes and SVM](https://mybinder.org/v2/gh/CS4641-Project/CS4641-website/main?labpath=emotions.ipynb)
 
 ### Comparing Different Models:
 
