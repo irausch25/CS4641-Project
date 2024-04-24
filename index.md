@@ -5,9 +5,9 @@ title: CS4641 Emotion Classification
 
 # Introduction/Background:
 
-- **Introduction**: The project is based around using NLP for a more nuanced understanding of emotional context in text using 6 fundamental human emotions.
-- **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], have revolutionized NLP, offering tools capable of a better nuanced understanding.
-- **Dataset Description**: Contains english twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
+- **Introduction**: The project is based on using NLP for a more nuanced understanding of emotional context in text using 6 fundamental human emotions.
+- **Literature review**: Pang and Lee [8] argue in their book that the field of sentiment analysis has evolved from broad classifications to detailed emotion detection due to the complexities of human language and sentiment. Deep learning, especially LSTM [6] and BERT [9], has revolutionized NLP, offering tools capable of a better-nuanced understanding.
+- **Dataset Description**: Contains English twitter messages with corresponding predominant emotion conveyed using six fundamental emotions denoted by numbers: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
 
 - Click [here](https://www.kaggle.com/datasets/nelgiriyewithana/emotions) to view the dataset from Kaggle.
 
@@ -15,7 +15,7 @@ title: CS4641 Emotion Classification
 
   **Pie Chart Visualization**: ![Pie Chart of Emotion Distribution](/plots/piechart.png)
 
-  From the visualizations above, we can observe several aspects of our dataset. The bar chart illustrates that some emotions, such as joy and sadness, are more frequently represented in the dataset than others like love and surprise. Similarly, the pie chart provides a different perspective by showing the proportion of each emotion within the dataset. It highlights that nearly two thirds of the dataset is composed of tweets expressing joy and sadness, which could be indicative of the general sentiment found in public tweets or a bias in the way the dataset was collected.
+  From the visualizations above, we can observe several aspects of our dataset. The bar chart illustrates that some emotions, such as joy and sadness, are more frequently represented in the dataset than others like love and surprise. Similarly, the pie chart provides a different perspective by showing the proportion of each emotion within the dataset. It highlights that nearly two-thirds of the dataset is composed of tweets expressing joy and sadness, which could be indicative of the general sentiment found in public tweets or a bias in the way the dataset was collected.
 
 # Problem Definition:
 
@@ -61,11 +61,11 @@ Based on research into NLP techniques, we selected and implemented 4 different a
 
 - **Implementation Details**: We implemented BERT by fine-tuning a pre-trained model on our dataset. Using the transformer package, we created a BERT model class, with a BERT-specific tokenizer. Following our data preprocessing, we trained the model using the Adam optimizer with 3 epochs.
 
-- **Rationale**: BERT has revolutionized the field of NLP through its deep contextual understanding, which is critical for tasks like emotion detection where context significantly influences meaning [7]. Unlike our earlier models which struggled with capturing nuanced meanings due to their reliance on static word embeddings, BERT's bidirectional architecture allows it to consider the entire context of a word within it’s sentence, leading to more accurate and contextually deep representations. Emotions in text can be subtle and heavily context-dependent; BERT's design to capture this context makes it a powerful tool for our problem.
+- **Rationale**: BERT has revolutionized the field of NLP through its deep contextual understanding, which is critical for tasks like emotion detection where context significantly influences meaning [7]. Unlike our earlier models which struggled with capturing nuanced meanings due to their reliance on static word embeddings, BERT's bidirectional architecture allows it to consider the entire context of a word within its sentence, leading to more accurate and contextually deep representations. Emotions in text can be subtle and heavily context-dependent; BERT's design to capture this context makes it a powerful tool for our problem.
 
 ### Evaluation and Initial Goals:
 
-Each model was evaluated based on accuracy, precision, and F1-score. These evaluations helped us understand the strengths and weaknesses of each approach in the context of our dataset and project goals.
+Each model was evaluated based on accuracy, precision, and F1 score. These evaluations helped us understand the strengths and weaknesses of each approach in the context of our dataset and project goals.
 
 From our research, our project goals are to reach or beat the following metrics:
 
@@ -85,13 +85,13 @@ From our research, our project goals are to reach or beat the following metrics:
   - RNN: 0.54 [4]
   - BERT: 0.84 [7]
 
-Building on these ideas, our planned performance ranking based on the 3 quantitiatve measures is: Naive Bayes < SVM < RNN < BERT.
+Building on these ideas, our planned performance ranking based on the 3 quantitative measures is: Naive Bayes < SVM < RNN < BERT.
 
 # Results and Discussion:
 
 ### Naive Bayes
 
-As stated before, we implemented 2 different versions of Naive Bayes, each using different feature extractions methods.
+As stated before, we implemented 2 different versions of Naive Bayes, each using different feature extraction methods.
 
 1. **Gaussian Naive Bayes with Word2Vec**:
 
@@ -99,11 +99,11 @@ As stated before, we implemented 2 different versions of Naive Bayes, each using
    - Average Precision: ~45.2%
    - Average F1-Score: 0.416
 
-   This model's performance fell short of our expectations. While the combination of Word2Vec and Gaussian Naive Bayes was theoretically appealing due to Word2Vec's ability to capture semantics in text, the actual outcomes highlighted a mismatch. Gaussian Naive Bayes assumes that all features are independent and follow a normal distribution, which likely doesn't hold true for the dense and interdepedent feature vectors produced by Word2Vec. This mismatch likely led to the model's poor performance, where the average accuracy is far lower than proposed from 74% to around 40%. Despite this poor accuracy, the average F1-Scores and the average precision values are in the margin of error area and almost match our proposed values.
+   This model's performance fell short of our expectations. While the combination of Word2Vec and Gaussian Naive Bayes was theoretically appealing due to Word2Vec's ability to capture semantics in text, the actual outcomes highlighted a mismatch. Gaussian Naive Bayes assumes that all features are independent and follow a normal distribution, which likely doesn't hold for the dense and interdependent feature vectors produced by Word2Vec. This mismatch likely led to the model's poor performance, where the average accuracy is far lower than proposed from 74% to around 40%. Despite this poor accuracy, the average F1 scores and the average precision values are in the margin of error area and almost match our proposed values.
 
    ![alt text](plots/GuassianNBconfusion.png)
 
-   The confusion matrix for the Gaussian Naive Bayes model reveals significant misclassifications across the board. The diagonal elements, which represent correct predictions, are generally outnumbered by the off-diagonal elements in several classes, demonstrating the high rate of incorrect classifications. Relatively speaking, the model performed the best on classifying `joy, but even for this emotion the predications were still quite scattered. Overall, from this matrix, we can guess that the semantic nuances between certain emotions were not captured effectively by the Gaussian model.
+   The confusion matrix for the Gaussian Naive Bayes model reveals significant misclassifications across the board. The diagonal elements, which represent correct predictions, are generally outnumbered by the off-diagonal elements in several classes, demonstrating the high rate of incorrect classifications. Relatively speaking, the model performed the best on classifying `joy, but even for this emotion the predictions were still quite scattered. Overall, from this matrix, we can guess that the semantic nuances between certain emotions were not captured effectively by the Gaussian model.
 
 2. **Multinomial Naive Bayes with Bag-of-Words**:
 
@@ -111,15 +111,15 @@ As stated before, we implemented 2 different versions of Naive Bayes, each using
    - Average Precision: ~85.8%
    - Average F1-Score: 0.851
 
-   Contrary to the Gaussian version, the Multinomial Naive Bayes model exceeded our expectations. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial set goals. Using Bag-of-Words for feature extraction, which breaks down text into individual word counts, aligned well with multinomial probabilitic framework of a multinomial naive bayes. The synergy between the two allowed this implementation to capture relevant patterns that are representative of the different emotions, which allowed for the improved metrics.
+   Contrary to the Gaussian version, the Multinomial Naive Bayes model exceeded our expectations. The metrics are substantially better than the Gaussian implementation, with the average accuracy aligning more closely with our initial set goals. Using Bag-of-Words for feature extraction, which breaks down text into individual word counts, aligned well with the multinomial probabilistic framework of a multinomial naive bayes. The synergy between the two allowed this implementation to capture relevant patterns that are representative of the different emotions, which allowed for improved metrics.
 
    ![alt text](plots/MultinomialNBconfusion.png)
 
-   Analyzing the confusion matrix for the Multinomial Naive Bayes model, we see a stark contrast to the Gaussian variant. The diagonal elements, indicating correct classifications, are more prominent across all emotional categories, which suggests the model was able discern between different emotions effectively. Notably, the precision for the sadness (0) and joy (1) were particularly high However, there is room for improvement in correctly classifying less frequent emotions, such as love (2) and surprise (5). From the matrix, we can see that the model still confuses them with other emotions, espcially surprise.
+   Analyzing the confusion matrix for the Multinomial Naive Bayes model, we see a stark contrast to the Gaussian variant. The diagonal elements, indicating correct classifications, are more prominent across all emotional categories, which suggests the model was able to discern between different emotions effectively. Notably, the precision for the sadness (0) and joy (1) were particularly high However, there is room for improvement in correctly classifying less frequent emotions, such as love (2) and surprise (5). From the matrix, we can see that the model still confuses them with other emotions, especially surprise.
 
 ### SVM (Support Vector Machine)
 
-For SVM, we tested our implementation using two different kernels, a linear one and non-linear rbf (Radial Basis Function). We utilized a guess and check system to test for linear seperability because after vectorization, we have 57697 features, which is difficult to visualize.
+For SVM, we tested our implementation using two different kernels, a linear one and a non-linear RBF (Radial Basis Function). We utilized a guess and check system to test for linear separability because after vectorization, there were 57697 features, which is difficult to visualize.
 
 1. **SVM using RBF Kernel**
 
@@ -127,7 +127,7 @@ For SVM, we tested our implementation using two different kernels, a linear one 
    - Average Precision: ~86.46919
    - Average F1-Score: 0.864026
 
-   This implementation performed quite well. The use of the RBF kernel was intended to capture non-linear patterns post-vectorization which are not immediately apparent. However, the slight underperformance compared to the Linear Kernel SVM could suggest that the dataset's features might be more linearly separable than initially anticipated or that we need to optimize the hyperparamters of the model further.
+   This implementation performed quite well. The use of the RBF kernel was intended to capture non-linear patterns post-vectorization which are not immediately apparent. However, the slight underperformance compared to the Linear Kernel SVM could suggest that the dataset's features might be more linearly separable than initially anticipated or that we need to optimize the hyperparameters of the model further.
    ![alt text](plots/NonLinearSVMConfusion.png)
 
    The confusion matrix for the RBF Kernel SVM displays a strong diagonal concentration, indicating a high rate of correct predictions. However, there are noticeable misclassifications, particularly between emotions fear (4) and surprise (5) and joy (1) and love (2). This indicates that the model might have had trouble differentiating between the finer emotional sentiments. However, overall, the model performed well.
@@ -142,7 +142,7 @@ For SVM, we tested our implementation using two different kernels, a linear one 
 
    ![alt text](plots/LinearSVMConfusion.png)
 
-   Analyzing the confusion matrix of the Linear Kernel SVM, we see a clear distinction in the diagonal elements, which represent correct classifications. The model shows strong performance especially in classifying sadness (0) and joy (1). However, it does seem to slightly struggle in distinguishing between joy (1) and love (2). Overall, from the matrix, the linear kernel was particularly effective at distinguishing between the different emotions.
+   Analyzing the confusion matrix of the Linear Kernel SVM, we see a clear distinction in the diagonal elements, which represent correct classifications. The model shows strong performance, especially in classifying sadness (0) and joy (1). However, it does seem to slightly struggle in distinguishing between joy (1) and love (2). Overall, from the matrix, the linear kernel was particularly effective at distinguishing between the different emotions.
 
 ### BERT (Bidirectional Encoder Representations from Transformers)
 
@@ -154,7 +154,7 @@ The BERT model excelled in emotion classification, with metrics indicating a str
 
   ![alt text](plots/BERTtrainingloss.png)
 
-  The graph above illustrates the model's training loss over the course of 3 epochs. There's a significant drop between the first and second epoch, followed by a more gradual decline into the third, which indicts that while the model is still learning and refining its understanding, the rate of improvement is slowing down.
+  The graph above illustrates the model's training loss over the course of 3 epochs. There's a significant drop between the first and second epoch, followed by a more gradual decline into the third, which indicates that while the model is still learning and refining its understanding, the rate of improvement is slowing down.
 
   ![alt text](plots/BERTaccuracy.png)
 
@@ -168,25 +168,25 @@ BERT's bidirectional nature and ability to understand context gives it a big adv
 
 Analyzing the results, we observed that the SVM implementations outperformed the Naive Bayes classifiers, with improvements of approximately 3% across accuracy, precision, and F1-score metrics, when comparing multinomial naive bayes and linear kernel SVM. This performance increases is likely due to SVM's robustness in handling high-dimensional data and its capacity for creating optimal hyperplanes that separate the various classes. Since it looks to maximize the margin and create the widest possible gap between them, SVM is particularly strong at text classification tasks.
 
-However, this increase in performance comes with trade-offs. One of the most significant is computational efficiency—SVM models, especially those with RBF kernels, require more intensive computation to identify the optimal boundary. During our project, the training time for SVM was approximately four times longer than that for the Naive Bayes models, and when consider practical applications, this trade-off needs to be evaluated appropriately. Naive bayes, while less accurate, does have some uses. Its assumption that features are indepdent allows for a simplier model and faster training times, which can be valuable at times. Similarly, Naive Bayes models understand the probabilities underlying the features, making it more informative if we need to udnerstand the likelihood of each class.
+However, this increase in performance comes with trade-offs. One of the most significant is computational efficiency—SVM models, especially those with RBF kernels, require more intensive computation to identify the optimal boundary. During our project, the training time for SVM was approximately four times longer than that for the Naive Bayes models, and when considering practical applications, this trade-off needs to be evaluated appropriately. Naive bayes, while less accurate, does have some uses. Its assumption that features are independent allows for a simpler model and faster training times, which can be valuable at times. Similarly, Naive Bayes models understand the probabilities underlying the features, making it more informative if we need to understand the likelihood of each class.
 
-When incorporating BERT into the comparison, the leap in performance is even greater. BERT achieved a substantial increase in accuracy, precision, and F1-score, surpassing both SVM and Naive Bayes by a significant margin. This performance is likely due to BERT's ability to understand the full context of text, which are lacking in simple Naive Bayes and SVM implementations.
+When incorporating BERT into the comparison, the leap in performance is even greater. BERT achieved a substantial increase in accuracy, precision, and F1-score, surpassing both SVM and Naive Bayes by a significant margin. This performance is likely due to BERT's ability to understand the full context of text, which is lacking in simple Naive Bayes and SVM implementations.
 
-Surprisingly, despite the increased complexity, our implementation of BERT with 3 epochs finished training faster than both SVM models. This could be due to a number of factors, including the efficiency of the BERT implementation within the Transformers library, our specific hardware, or the optimization techniques we utilized. Nevertheless, Naive Bayes remains the fastest model to train.
+Surprisingly, despite the increased complexity, our implementation of BERT with 3 epochs finished training faster than both SVM models. This could be due to several factors, including the efficiency of the BERT implementation within the Transformers library, our specific hardware, or the optimization techniques we utilized. Nevertheless, Naive Bayes remains the fastest model to train.
 
-In practical applications, neither of these models is the obvious choice and involves a balance of different factors. When time and computational resources are limited, Naive Bayes might work as a good model, providing quick insights at the cost of some accuracy. SVM, with its superior performance, could be used when more precision and accuracy is necessary and you can afford longer training times. BERT's quick training in our case suggests that with the right infrastructure and optimization complex models can be efficient. However, it's possible that BERT will require more computational needs for regular upkeep, and might not be ideal in resource-constrained environments.
+In practical applications, neither of these models is the obvious choice and involves a balance of different factors. When time and computational resources are limited, Naive Bayes might work as a good model, providing quick insights at the cost of some accuracy. SVM, with its superior performance, could be used when more precision and accuracy are necessary and you can afford longer training times. BERT's quick training in our case suggests that with the right infrastructure and optimization complex models can be efficient. However, it's possible that BERT will require more computational needs for regular upkeep, and might not be ideal in resource-constrained environments.
 
 Ultimately, the decision on which model to use depends on the specific requirements of the task, the available computational resources, and how accurate the model needs to be.
 
 ### Jupyter Notebook:
 
-We also created two interactive jupyter notebooks that explain each of these algorithms. These can be accessed on the GitHub repository or using these links:
+We also created two interactive Jupyter notebooks that explain each of these algorithms. These can be accessed on the GitHub repository or using these links:
 
 [Naive Bayes and SVM](https://mybinder.org/v2/gh/CS4641-Project/CS4641-website/main?labpath=emotions.ipynb)
 
 # Next Steps:
 
-Going forward, we have many routes to take. We can continue testing additional classification algorithms such as logistic regression or exploring more deep learning techniques like a RNN. Alternatively, we can compile a new dataset that more accurately captures the variety of emotions out there, and train our models on this new dataset to better suit our solution. Finally, we have plans to implement a GUI and host our trained models, so that users can input a sentence and get the corresponding sentiment.
+Going forward, we have many routes to take. We can continue testing additional classification algorithms such as logistic regression or exploring more deep learning techniques like an RNN. Alternatively, we can compile a new dataset that more accurately captures the variety of emotions out there, and train our models on this new dataset to better suit our solution. Finally, we have plans to implement a GUI and host our trained models, so that users can input a sentence and get the corresponding sentiment.
 
 # Gnatt Chart:
 
@@ -196,8 +196,8 @@ Going forward, we have many routes to take. We can continue testing additional c
 
 | Name              | Final Contributions                                                                             |
 | :---------------- | :---------------------------------------------------------------------------------------------- |
-| Ian Rausch        | Github page writing, data preprocessing, SVM and Naive Bayes implementations and visualizations |
-| Parag Ambildhuke  | Github page updates, Jupyter notebook upkeep, Video recording                                   |
+| Ian Rausch        | GitHub page writing, data preprocessing, SVM and Naive Bayes implementations and visualizations |
+| Parag Ambildhuke  | GitHub page updates, Jupyter notebook upkeep, Video recording                                   |
 | Pritesh Rajyaguru | LSTM RNN testing, Video recording                                                               |
 | Shubham Dhar      | BERT Visualizations, Video recording                                                            |
 | Zachary Seletsky  | BERT implementation and optimization, Video slide presentation                                  |
