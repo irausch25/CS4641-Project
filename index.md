@@ -35,17 +35,17 @@ Using these 3 methods, we have a clean and structured dataset that can be easily
 
 # Models/Algorithms:
 
-Based on research into NLP techniques, we selected and implemented 4 different algorithms to evaluate how each performed on our dataset:
+Based on research into NLP techniques, we selected and implemented 3 different algorithms to evaluate how each performed on our dataset:
 
 ### Naive Bayes
 
 - **Implementation Details**:
 
-  - **Gaussian Naive Bayes with Word2Vec**: For this model, we used Word2Vec to transform sentences into numerical vectors that capture the semantic meanings of words. These vectors were then into a Gaussian Naive Bayes, which assumes that features follow a normal distribution.
+  - **Gaussian Naive Bayes with Word2Vec**: For this model, we used Word2Vec to transform sentences into numerical vectors that capture the semantic meanings of words. These vectors were then inputted into a Gaussian Naive Bayes, which assumes that features follow a normal distribution.
 
   - **Multinomial Naive Bayes with Bag-of-Words**: This model utilized Bag-of-Words to convert text into fixed-length vectors, where each entry represents the frequency of a word. This approach fits well with Multinomial Naive Bayes, which assumes data distribution to be multinomial.
 
-- **Rationale**: Naive Bayes is well-established as a text classification technique because of its ability to handle large datasets efficiently and its effectiveness in probabilistic separation of classes. From our research, incorporating Word2Vec with Gaussian Naive Bayes seemed like a promising sentiment analysis [10]. However, in practice, this model underperformed due to the independence assumption of Gaussian Naive Bayes, which conflicts with the correlated features in Word2Vec. As a result, we also implemented Multinomial Naive Bayes, which complement the discrete counts from Bag-of-Words. Additionally, we opted to implement Naive Bayes first as it will be a great baseline to assess the performance of more complex models and understand our dataset further.
+- **Rationale**: Naive Bayes is well-established as a text classification technique because of its ability to handle large datasets efficiently and its effectiveness in probabilistic separation of classes. From our research, incorporating Word2Vec with Gaussian Naive Bayes seemed promising for sentiment analysis [10]. However, in practice, this model underperformed due to the independence assumption of Gaussian Naive Bayes, which conflicts with the correlated features in Word2Vec. As a result, we also implemented Multinomial Naive Bayes, which complement the discrete counts from Bag-of-Words. Additionally, we opted to implement Naive Bayes first as it will be a great baseline to assess the performance of more complex models and understand our dataset further.
 
 ### Support Vector Machine (SVM)
 
@@ -72,20 +72,17 @@ From our research, our project goals are to reach or beat the following metrics:
 - Accuracy:
   - Naive Bayes: 74.1% [3]
   - SVM: 85%+ [3]
-  - RNN: 85%+ [3]
   - BERT: 94% [3]
 - Precision:
   - Naive Bayes: 50% [2]
   - SVM: 67% [2]
-  - RNN: 95% [2]
   - BERT: 95%+
 - F1 Score:
   - Naive Bayes: 0.49 [4]
   - SVM: 0.535 [4]
-  - RNN: 0.54 [4]
   - BERT: 0.84 [7]
 
-Building on these ideas, our planned performance ranking based on the 3 quantitative measures is: Naive Bayes < SVM < RNN < BERT.
+Building on these ideas, our planned performance ranking based on the 3 quantitative measures is: Naive Bayes < SVM < BERT.
 
 # Results and Discussion:
 
@@ -138,7 +135,7 @@ For SVM, we tested our implementation using two different kernels, a linear one 
    - Average Precision: ~88.2895%
    - Average F1-Score: 0.882915
 
-   The Linear Kernel SVM outperformed the RBF Kernel SVM, suggesting the feature space, post-vectorization, might indeed be linearly separable to a large degree. The high performance across accuracy, precision, and F1-score metrics indicates that this model was effective in creating a decision boundary that correctly separates the different emotion classes without needing the complexity of a non-linear kernel.
+   The Linear Kernel SVM outperformed the RBF Kernel SVM, suggesting the feature space, post-vectorization, might be linearly separable to a large degree. The high performance across accuracy, precision, and F1-score metrics indicates that this model was effective in creating a decision boundary that correctly separates the different emotion classes without needing the complexity of a non-linear kernel.
 
    ![alt text](plots/LinearSVMConfusion.png)
 
